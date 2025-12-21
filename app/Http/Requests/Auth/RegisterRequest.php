@@ -16,15 +16,19 @@ class RegisterRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules() {
+    public function rules(): array
+    {
         return [
-            'name' => 'required|string|between(2,100)',
+            // PERBAIKAN: Ganti 'between(2,100)' menjadi 'between:2,100'
+            'name' => 'required|string|between:2,100',
+            
             'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|min(6)',
-            'role' => 'nullable|in:admin,operator', // Default nanti operator
+            
+            // PERBAIKAN: Ganti 'min(6)' menjadi 'min:6'
+            'password' => 'required|string|min:6',
+            
+            'role' => 'nullable|in:admin,operator',
         ];
     }
 }

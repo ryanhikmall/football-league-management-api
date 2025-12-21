@@ -16,13 +16,13 @@ class LoginRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules() {
+    public function rules(): array
+    {
         return [
             'email' => 'required|email',
-            'password' => 'required|string|min(6)',
+            // PERBAIKAN: Ganti 'min(6)' menjadi 'min:6'
+            'password' => 'required|string|min:6',
         ];
     }
 }

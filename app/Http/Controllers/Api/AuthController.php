@@ -8,32 +8,34 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controllers\HasMiddleware; // Import Interface Wajib
+use Illuminate\Routing\Controllers\Middleware;    // Import Class Middleware
 
-class AuthController extends Controller
+class AuthController extends Controller implements HasMiddleware // Implement Interface ini
 {
     /**
-     * Create a new AuthController instance.
+     * Tentukan middleware untuk controller ini (Pengganti __construct)
      */
-    public function __construct()
+    public static function middleware(): array
     {
-        // Middleware auth:api dipasang di semua method KECUALI login dan register
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        return [
+            // Pasang 'auth:api' untuk semua method KECUALI login & register
+            new Middleware('auth:api', except: ['login', 'register']),
+        ];
     }
 
-    /**
-     * Register user baru.
-     */
     public function register(RegisterRequest $request)
     {
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role ?? 'operator', // Default operator jika kosong
+            'role' => $request->role ?? 'operator',
         ]);
 
-        $token = auth()->login($user);
+        // Gunakan guard 'api' secara eksplisit
+        $token = Auth::guard('api')->login($user);
 
         return response()->json([
             'message' => 'User successfully registered',
@@ -45,56 +47,41 @@ class AuthController extends Controller
         ], 201);
     }
 
-    /**
-     * Login dan dapatkan token.
-     */
     public function login(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
 
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (!$token = Auth::guard('api')->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized - Wrong Email or Password'], 401);
         }
 
         return $this->respondWithToken($token);
     }
 
-    /**
-     * Dapatkan profil user yang sedang login.
-     */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(Auth::guard('api')->user());
     }
 
-    /**
-     * Log the user out (Invalidate the token).
-     */
     public function logout()
     {
-        auth()->logout();
+        Auth::guard('api')->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    /**
-     * Refresh a token.
-     */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(Auth::guard('api')->refresh());
     }
 
-    /**
-     * Helper response token structure.
-     */
     protected function respondWithToken($token)
     {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'expires_in' => Auth::guard('api')->factory()->getTTL() * 60,
+            'user' => Auth::guard('api')->user()
         ]);
     }
 }

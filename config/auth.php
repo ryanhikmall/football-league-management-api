@@ -40,9 +40,9 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
+        // Pastikan bagian ini benar:
         'api' => [
-            'driver' => 'jwt', // Ubah dari token ke jwt
+            'driver' => 'jwt', 
             'provider' => 'users',
         ],
     ],
