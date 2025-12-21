@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\MatchController;
 
 // Test Route sederhana untuk memastikan file terbaca
 Route::get('/test', function () {
@@ -18,4 +19,12 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/me', [AuthController::class, 'me']);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Syaihul's Routes (Matches)
+    |--------------------------------------------------------------------------
+    */
+    Route::apiResource('matches', MatchController::class);
 });
