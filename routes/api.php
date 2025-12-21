@@ -3,12 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-*/
+// Test Route sederhana untuk memastikan file terbaca
+Route::get('/test', function () {
+    return response()->json(['message' => 'API is working!']);
+});
 
+// Group Auth
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
