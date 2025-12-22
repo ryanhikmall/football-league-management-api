@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Dashboard Specific Styles
+   ========================================================================== */
+
+:root {
+    --color-primary: #ffffff;
+    --color-accent: #3b82f6;
+    --color-danger: #ef4444;
+    --color-success: #10b981;
+    --color-bg: #050505; 
+    --color-bg-subtle: #0f0f10;
+    --color-card-bg: rgba(20, 20, 22, 0.65);
+    --color-text: #ececf1;
+    --color-text-muted: #8e8ea0;
+    --color-border: rgba(255, 255, 255, 0.08);
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+    --container-width: 1140px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    background-image: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
+    background-attachment: fixed;
+    padding-top: 80px; /* FIX: Prevent content overlap with fixed header */
+}
+
+.container { width: 100%; max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+/* Glass Card */
+.glass-card {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Header & Titles */
+.card-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.5rem; padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+.card-title {
+    font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 10px;
+    color: var(--color-primary);
+}
+
+/* Live Badge */
+.live-badge {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(239, 68, 68, 0.1); color: var(--color-danger);
+    padding: 4px 10px; border-radius: var(--radius-full);
+    font-size: 0.7rem; font-weight: 700;
+    border: 1px solid rgba(239, 68, 68, 0.2); letter-spacing: 0.05em;
+}
+.live-dot {
+    width: 6px; height: 6px; background: var(--color-danger);
+    border-radius: 50%; animation: pulse 1.5s infinite;
+}
+
+/* Tables */
+.table-responsive {
+    overflow-x: auto;
+    margin: 0 -1rem; padding: 0 1rem; /* Full width scroll on mobile */
+}
+.data-table {
+    width: 100%; border-collapse: collapse; font-size: 0.9rem; white-space: nowrap;
+}
+.data-table th {
+    text-align: left; padding: 0.8rem; color: var(--color-text-muted);
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--color-border);
+}
+.data-table td {
+    padding: 1rem 0.8rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    color: var(--color-text); vertical-align: middle;
+}
+.data-table tr:hover { background: rgba(255, 255, 255, 0.02); }
+
+/* Table Content */
+.rank-cell { font-weight: 700; color: var(--color-text-muted); width: 40px; text-align: center; }
+.rank-top { color: var(--color-accent); }
+
+.team-flex { display: flex; align-items: center; gap: 12px; font-weight: 600; }
+/* New Minimalist Club Icon Style */
+.team-logo {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 800; color: var(--color-text);
+    font-family: var(--font-mono);
+}
+
+.stat-cell { color: var(--color-text-muted); text-align: center; font-family: var(--font-mono); }
+.points-cell { font-weight: 700; color: white; text-align: center; font-family: var(--font-mono); }
+
+/* Match List */
+.match-list { display: flex; flex-direction: column; }
+.match-item {
+    padding: 1.25rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    display: flex; flex-direction: column; gap: 0.8rem;
+}
+.match-item:last-child { border-bottom: none; padding-bottom: 0; }
+.match-item:first-child { padding-top: 0; }
+
+.match-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: var(--color-text-muted);
+    text-transform: uppercase; letter-spacing: 0.05em;
+}
+.match-time { font-family: var(--font-mono); font-weight: 600; }
+.match-live { color: var(--color-danger); font-weight: 700; display: flex; align-items: center; gap: 4px; }
+
+.match-teams { display: flex; justify-content: space-between; align-items: center; }
+.team-name { font-size: 0.9rem; font-weight: 600; width: 35%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.team-away { text-align: right; }
+
+.match-score {
+    background: var(--color-bg-subtle); border: 1px solid var(--color-border);
+    padding: 0.35rem 0.8rem; border-radius: 8px;
+    font-family: var(--font-mono); font-weight: 700; font-size: 0.9rem;
+    min-width: 60px; text-align: center; color: var(--color-text);
+}
+.score-live { color: var(--color-danger); border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.05); }
+
+/* API CTA Section (New) */
+.api-cta {
+    text-align: center;
+    padding: 4rem 2rem;
+    margin-top: 2rem;
+    background: linear-gradient(180deg, rgba(20, 20, 22, 0.4) 0%, rgba(10, 10, 12, 0.8) 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+.api-cta h3 { font-size: 1.5rem; margin-bottom: 0.75rem; color: white; }
+.api-cta p { color: var(--color-text-muted); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* Keyframes */
+@keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 900px) {
+    .dashboard-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+}

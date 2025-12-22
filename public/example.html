@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Demo - Football League Client</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z' stroke='white' stroke-width='2'/><circle cx='12' cy='12' r='4' fill='white'/></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/example.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="../" class="nav__logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="white" stroke-width="2"/>
+                    <path d="M12 2V22" stroke="white" stroke-width="2" stroke-opacity="0.2"/>
+                    <path d="M2 12H22" stroke="white" stroke-width="2" stroke-opacity="0.2"/>
+                    <circle cx="12" cy="12" r="4" fill="white"/>
+                </svg>
+                <span>LeagueApp</span>
+            </a>
+            <ul class="nav__links">
+                <li><a href="#" class="active" style="color: white; font-weight:600;">Live Dashboard</a></li>
+                <li><a href="../">Documentation</a></li>
+                <li><a href="#">Matches</a></li>
+            </ul>
+            <div class="nav__actions">
+                <a href="../" class="btn btn--sm btn--glass">API Docs</a>
+                <a href="#" class="btn btn--sm btn--primary">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero container" style="padding-top: 6rem; padding-bottom: 3rem;">
+            <div class="fade-in-up">
+                <div class="hero__badge">Official Live Data</div>
+                <h1 class="hero__headline">
+                    Season <span class="text-accent">2025/2026</span><br>
+                    Live Standings
+                </h1>
+                <p class="hero__subheadline">
+                    Real-time updates powered by our Football League API. 
+                    Data refreshes automatically as match events occur.
+                </p>
+            </div>
+        </section>
+
+        <!-- DASHBOARD GRID -->
+        <section class="container">
+            <div class="dashboard-grid fade-in-up" style="transition-delay: 0.2s;">
+
+                <!-- KIRI: KLASEMEN (Standings) -->
+                <div class="glass-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M3 12h18"></path><path d="M3 18h18"></path></svg>
+                            League Table
+                        </div>
+                        <div class="live-badge">
+                            <div class="live-dot"></div> LIVE
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">#</th>
+                                    <th>Club</th>
+                                    <th style="text-align: center;">MP</th>
+                                    <th style="text-align: center;">W</th>
+                                    <th style="text-align: center;">D</th>
+                                    <th style="text-align: center;">L</th>
+                                    <th style="text-align: center;">GD</th>
+                                    <th style="text-align: center; color: white;">Pts</th>
+                                </tr>
+                            </thead>
+                            <tbody id="standings-body">
+                                <!-- Data injected via JS -->
+                                <tr>
+                                    <td colspan="8" style="text-align: center; padding: 2rem; color: var(--color-text-muted);">
+                                        Loading standings...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- KANAN: JADWAL (Matches) -->
+                <div class="glass-card" style="height: fit-content;">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            Matchweek 12
+                        </div>
+                    </div>
+
+                    <div class="match-list" id="matches-list">
+                        <!-- Data injected via JS -->
+                        <div style="text-align: center; padding: 2rem; color: var(--color-text-muted);">
+                            Loading matches...
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- API CALL TO ACTION (New Section) -->
+            <div class="api-cta fade-in-up" style="transition-delay: 0.3s;">
+                <h3>Want to build your own football app?</h3>
+                <p>
+                    This dashboard is powered by our robust REST API. 
+                    Get access to live scores, player stats, and automated league management tools today.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="../" class="btn btn--primary">
+                        Read API Documentation
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:6px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="../#docs" class="btn btn--secondary">Get API Key</a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <p>&copy; 2025 LigaBola Client App. Powered by Laravel API.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/AllyncID/football-league-management-api" target="_blank" style="display: flex; align-items: center; gap: 6px;">
+                        Source Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script src="script/client.js"></script>
+</body>
+</html>
