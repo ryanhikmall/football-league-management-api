@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Football League Management API - Early Access</title>
+    <meta name="description" content="Professional REST API for football league management.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z' stroke='white' stroke-width='2'/><circle cx='12' cy='12' r='4' fill='white'/></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="nav__logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="white" stroke-width="2"/>
+                    <path d="M12 2V22" stroke="white" stroke-width="2" stroke-opacity="0.2"/>
+                    <path d="M2 12H22" stroke="white" stroke-width="2" stroke-opacity="0.2"/>
+                    <circle cx="12" cy="12" r="4" fill="white"/>
+                </svg>
+                <span>LeagueAPI</span>
+            </a>
+            <ul class="nav__links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#docs">Docs</a></li>
+                <li><a href="example.html">Examples</a></li>
+            </ul>
+            <div class="nav__actions">
+                <a href="example.html" class="btn btn--sm btn--glass">Live Demo</a>
+                <a href="#docs" class="btn btn--sm btn--primary">Get API Key</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero container">
+            <div class="fade-in-up">
+                <div class="hero__badge">Early Access - Developers Preview</div>
+                <h1 class="hero__headline">
+                    The Ultimate League <br>
+                    <span class="text-accent">Management API</span>
+                </h1>
+                <p class="hero__subheadline">
+                    Streamline your football platform. Manage teams, schedule matches, and generate automated standings with a robust, developer-first REST API.
+                </p>
+                <div class="hero__ctas">
+                    <a href="#docs" class="btn btn--primary">
+                        Read Documentation
+                    </a>
+                    <a href="example.html" class="btn btn--secondary">
+                        View Integration
+                    </a>
+                </div>
+            </div>
+
+            <!-- MAC WINDOW -->
+            <div class="code-window-wrapper fade-in-up" style="transition-delay: 0.2s;">
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-controls">
+                            <div class="control mac-red"></div>
+                            <div class="control mac-yellow"></div>
+                            <div class="control mac-green"></div>
+                        </div>
+                        <div class="window-title">terminal — curl</div>
+                    </div>
+                    <div class="code-content">
+                        <span class="token-cmd">curl</span> -X GET \<br>
+                        &nbsp;&nbsp;<span class="token-str">"http://127.0.0.1:8000/api/standings"</span> \<br>
+                        &nbsp;&nbsp;-H <span class="token-arg">'Authorization: Bearer YOUR_TOKEN'</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES SECTION -->
+        <section class="section container" id="features">
+            <div class="section-header-centered fade-in-up">
+                <h2 class="section-title">Everything You Need</h2>
+                <p class="section-subtitle">
+                    Powerful features designed to simplify league administration and enhance data reliability for developers.
+                </p>
+            </div>
+
+            <div class="features__grid">
+                <!-- Feature 1 -->
+                <div class="glass-card feature-item fade-in-up">
+                    <div class="feature-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    </div>
+                    <h3 class="feature-title">Secured Authentication</h3>
+                    <p class="feature-desc">Powered by Laravel Sanctum. Role-based access control for Operators and Admins using JWT Bearer Tokens.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="glass-card feature-item fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="feature-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6M6 20V10M18 20V4"></path></svg>
+                    </div>
+                    <h3 class="feature-title">Automated Standings</h3>
+                    <p class="feature-desc">Points, Goal Difference (GD), and Rankings are calculated automatically whenever a match score is updated.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="glass-card feature-item fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="feature-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    </div>
+                    <h3 class="feature-title">Full CRUD Support</h3>
+                    <p class="feature-desc">Comprehensive endpoints for managing Teams, Players, and Match Schedules with strict data validation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOCS SECTION -->
+        <section class="section container" id="docs">
+            <div class="section-header">
+                <h2 class="section-title">API Reference</h2>
+                <p class="section-subtitle" style="text-align: left; margin-left: 0;">Interact directly with the endpoints below.</p>
+            </div>
+
+            <div class="playground-container fade-in-up">
+                <!-- SIDEBAR -->
+                <div class="api-sidebar-wrapper">
+                    <div class="api-sidebar" id="sidebar-list">
+                        <!-- Content populated by JS -->
+                    </div>
+                </div>
+
+                <!-- MAIN DETAIL -->
+                <div class="glass-card api-detail">
+                    <div id="detail-content">
+                        <!-- Content populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION (Refined Description & Title) -->
+        <section class="section container" style="padding-top: 2rem;">
+            <div class="glass-card cta-card fade-in-up">
+                <div class="cta-content">
+                    <h3 style="font-size: 2.25rem; font-weight: 700; margin-bottom: 1rem;">Start Building Your League Platform</h3>
+                    <p style="color: var(--color-text-muted); margin-bottom: 2.5rem; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.8;">
+                        Don't reinvent the wheel. Our API provides a solid foundation for your football management system. With comprehensive documentation and clear examples, you'll be up and running in minutes, not days. Check out our integration guides for JavaScript (Fetch & Axios) to see how easy it is to connect.
+                    </p>
+                    <a href="example.html" class="btn btn--primary btn--lg">
+                        See Integration Examples
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <p>&copy; 2025 Football League API. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/AllyncID/football-league-management-api" target="_blank" style="display: flex; align-items: center; gap: 6px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-7.38-4.005-1.41-.09-.285-.585-1.185-1-1.425-.345-.195-.84-.675-.015-.69.78-.015 1.335.72 1.515 1.02 1.485 2.505 3.915 1.8 4.875 1.365.15-.96.525-1.605.945-1.98-2.655-.3-5.445-1.32-5.445-5.91 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.61-5.475 5.91.54.465 1.02 1.38 1.02 2.79 0 2.01-.015 3.63-.015 4.125 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        Source Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script/script.js"></script>
+</body>
+</html>
