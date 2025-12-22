@@ -32,10 +32,10 @@ Route::group([
 
 
     /*
-|--------------------------------------------------------------------------
-| Ryan's Routes (Teams & Players)
-|--------------------------------------------------------------------------
-*/
-Route::apiResource('teams', TeamController::class);
-Route::apiResource('players', PlayerController::class);
+    |--------------------------------------------------------------------------
+    | Ryan's Routes (Teams & Players)
+    |--------------------------------------------------------------------------
+    */
+    Route::apiResource('teams', TeamController::class);
+    Route::apiResource('players', PlayerController::class);
 });
