@@ -14,6 +14,7 @@ class Team extends Model
     // Relasi: 1 Tim -> Banyak Players
     public function players()
     {
+        // PERBAIKAN: Gunakan ::class (double colon), bukan .class
         return $this->hasMany(Player::class);
     }
 }

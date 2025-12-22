@@ -15,7 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('team_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->enum('position', ['GK', 'DF', 'MF', 'FW']);
+            $table->enum('position', [
+                'GK',
+                'CB', 'LB', 'RB', 'LWB', 'RWB',
+                'DM', 'CM', 'AM', 'LM', 'RM',
+                'LW', 'RW',
+                'SS', 'CF', 'ST'
+            ]);
             $table->integer('jersey_number');
             $table->timestamps();
         });
