@@ -41,7 +41,7 @@ body {
     gap: 2rem;
     align-items: start;
     margin-top: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 /* Glass Card */
@@ -60,6 +60,8 @@ body {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 1.5rem; padding-bottom: 1rem;
     border-bottom: 1px solid var(--color-border);
+    position: relative; /* Context for dropdown absolute */
+    z-index: 20; /* Ensure header stays above content if needed */
 }
 .card-title {
     font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 10px;
@@ -83,6 +85,7 @@ body {
 .table-responsive {
     overflow-x: auto;
     margin: 0 -1rem; padding: 0 1rem; /* Full width scroll on mobile */
+    min-height: 300px;
 }
 .data-table {
     width: 100%; border-collapse: collapse; font-size: 0.9rem; white-space: nowrap;
@@ -112,6 +115,9 @@ body {
     display: flex; align-items: center; justify-content: center;
     font-size: 0.75rem; font-weight: 800; color: var(--color-text);
     font-family: var(--font-mono);
+}
+.team-logo.small {
+    width: 24px; height: 24px; font-size: 0.6rem; border-radius: 6px;
 }
 
 .stat-cell { color: var(--color-text-muted); text-align: center; font-family: var(--font-mono); }
@@ -146,7 +152,7 @@ body {
 }
 .score-live { color: var(--color-danger); border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.05); }
 
-/* API CTA Section (New) */
+/* API CTA Section */
 .api-cta {
     text-align: center;
     padding: 4rem 2rem;
@@ -158,6 +164,131 @@ body {
 .api-cta h3 { font-size: 1.5rem; margin-bottom: 0.75rem; color: white; }
 .api-cta p { color: var(--color-text-muted); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 
+
+/* ==========================================================================
+   CUSTOM DROPDOWN STYLES (New)
+   ========================================================================== */
+.custom-dropdown {
+    position: relative;
+    width: 200px;
+    font-family: var(--font-sans);
+}
+
+.dropdown-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dropdown-trigger:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-trigger .chevron-icon {
+    transition: transform 0.3s ease;
+    opacity: 0.6;
+}
+
+/* State when active */
+.custom-dropdown.active .dropdown-trigger {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: var(--color-accent);
+}
+
+.custom-dropdown.active .dropdown-trigger .chevron-icon {
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 240px; /* Lebar sedikit lebih besar dari trigger */
+    background: #141416;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+    padding: 6px;
+    z-index: 50;
+    
+    /* Animation defaults */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.custom-dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Dropdown Items */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+}
+
+.dropdown-item.selected {
+    background: rgba(59, 130, 246, 0.15); /* Accent color dim */
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.dropdown-item .team-logo {
+    border-color: rgba(255,255,255,0.05); /* Subtler border inside dropdown */
+}
+
+/* ==========================================================================
+   BADGES & OTHERS
+   ========================================================================== */
+.pos-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    min-width: 36px;
+    text-align: center;
+}
+.pos-GK { background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.2); }
+.pos-DF { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2); }
+.pos-MF { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2); }
+.pos-FW { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+.jersey-num {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-weight: 500;
+}
+
 /* Keyframes */
 @keyframes pulse {
     0% { opacity: 1; transform: scale(1); }
@@ -167,4 +298,5 @@ body {
 
 @media (max-width: 900px) {
     .dashboard-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .dropdown-menu { right: auto; left: 0; width: 100%; }
 }

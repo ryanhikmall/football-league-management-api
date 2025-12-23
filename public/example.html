@@ -12,10 +12,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Stylesheets -->
-    <!-- Pastikan path style Anda benar -->
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/loading.css">
     <link rel="stylesheet" href="style/example.css">
@@ -23,8 +22,7 @@
 
 <body>
 
-    <!-- LOADING OVERLAY WRAPPER -->
-    <!-- Ini bagian yang diubah: Membungkus spinner dengan overlay -->
+    <!-- LOADING OVERLAY -->
     <div id="loading-overlay">
         <div class="ripple-spinner">
             <div></div><div></div>
@@ -61,7 +59,7 @@
             <div class="fade-in-up">
                 <div class="hero__badge">Official Live Data</div>
                 <h1 class="hero__headline">
-                    Season <span class="text-accent">2025/2026</span><br>
+                    Season <span class="text-accent" style="font-weight: 800;">2024/2025</span><br>
                     Live Standings
                 </h1>
                 <p class="hero__subheadline">
@@ -132,7 +130,47 @@
 
             </div>
 
-            <!-- API CALL TO ACTION (New Section) -->
+            <!-- NEW SECTION: PLAYERS SQUAD -->
+            <!-- Update: Dropdown diganti dengan Custom UI Dropdown -->
+            <div class="glass-card fade-in-up" style="margin-bottom: 4rem; transition-delay: 0.25s; overflow: visible;">
+                <div class="card-header">
+                    <div class="card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        Team Squads
+                    </div>
+                    
+                    <!-- CUSTOM DROPDOWN STRUCTURE -->
+                    <div class="custom-dropdown" id="team-dropdown">
+                        <button class="dropdown-trigger">
+                            <span id="selected-team-display">Select Team</span>
+                            <svg class="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </button>
+                        <div class="dropdown-menu">
+                            <!-- Items Injected by JS -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th width="10%">No</th>
+                                <th>Player Name</th>
+                                <th width="15%">Pos</th>
+                                <th width="15%" style="text-align: center;">Apps</th>
+                                <th width="15%" style="text-align: center;">Goals</th>
+                            </tr>
+                        </thead>
+                        <tbody id="players-body">
+                            <!-- Data injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- API CALL TO ACTION -->
             <div class="api-cta fade-in-up" style="transition-delay: 0.3s;">
                 <h3>Want to build your own football app?</h3>
                 <p>
