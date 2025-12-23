@@ -355,6 +355,7 @@ window.loadEndpoint = (index, el) => {
         paramHTML = `<p style="margin-bottom:2rem; color:var(--color-text-muted); font-size:0.85rem; font-style:italic; opacity:0.7;">No parameters required.</p>`;
     }
 
+    // FIX: Removed indentation for console-body to ensure text aligns left properly
     content.innerHTML = `
         <div class="fade-in-up visible">
             <div class="detail-header">
@@ -391,9 +392,7 @@ window.loadEndpoint = (index, el) => {
                          <button class="btn btn--primary btn--sm" style="padding:0.4rem 0.8rem; font-size:0.75rem;" onclick="runSim(this, ${index}, 'success')">Send Request</button>
                     </div>
                 </div>
-                <div class="console-body send-request" id="console-output-${index}">
-                    <span style="opacity:0.4; font-style:italic;">// Click 'Send Request' or 'Test Error' to simulate...</span>
-                </div>
+                <div class="console-body send-request" id="console-output-${index}"><span style="opacity:0.4; font-style:italic;">// Click 'Send Request' or 'Test Error' to simulate...</span></div>
             </div>
         </div>
     `;
@@ -449,6 +448,36 @@ window.runSim = (btn, index, type) => {
 
     }, 600);
 };
+
+// HERO TAB SWITCHER (HTTP/Curl)
+window.switchHeroTab = (type, btn) => {
+    document.querySelectorAll('#hero-section .tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const httpContent = document.getElementById('hero-code-http');
+    const curlContent = document.getElementById('hero-code-curl');
+
+    if (type === 'http') {
+        httpContent.style.display = 'block';
+        curlContent.style.display = 'none';
+    } else {
+        httpContent.style.display = 'none';
+        curlContent.style.display = 'block';
+    }
+}
+
+// INTEGRATION TAB SWITCHER (JS/PHP/Python)
+window.switchIntegrationTab = (lang, btn) => {
+    // 1. Reset all buttons in integration section
+    document.querySelectorAll('#integration .tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // 2. Hide all content blocks
+    document.querySelectorAll('#integration .code-content').forEach(el => el.style.display = 'none');
+
+    // 3. Show selected
+    document.getElementById(`code-${lang}`).style.display = 'block';
+}
 
 renderSidebar();
 const firstItem = document.querySelector('.sidebar-item');

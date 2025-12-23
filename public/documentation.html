@@ -21,14 +21,13 @@
 </head>
 
 <body>
-
+    <!-- LOADING OVERLAY WRAPPER -->
     <div id="loading-overlay">
-        <div class="spinner">
-            <div></div><div></div><div></div><div></div><div></div><div></div>
-            <div></div><div></div><div></div><div></div><div></div><div></div>
+        <div class="ripple-spinner">
+            <div></div><div></div>
         </div>
     </div>
-
+    
     <!-- NAVIGATION -->
     <header class="header">
         <div class="header-inner">
@@ -43,6 +42,7 @@
             </a>
             <ul class="nav__links">
                 <li><a href="#features">Features</a></li>
+                <li><a href="#integration">Integration</a></li>
                 <li><a href="#docs">Docs</a></li>
                 <li><a href="example">Examples</a></li>
             </ul>
@@ -55,7 +55,7 @@
 
     <main>
         <!-- HERO SECTION -->
-        <section class="hero container">
+        <section class="hero container" id="hero-section">
             <div class="fade-in-up">
                 <div class="hero__badge">Early Access - Developers Preview</div>
                 <h1 class="hero__headline">
@@ -75,7 +75,7 @@
                 </div>
             </div>
 
-            <!-- MAC WINDOW -->
+            <!-- MAC WINDOW (HERO) -->
             <div class="code-window-wrapper fade-in-up" style="transition-delay: 0.2s;">
                 <div class="code-window">
                     <div class="window-bar">
@@ -84,9 +84,20 @@
                             <div class="control mac-yellow"></div>
                             <div class="control mac-green"></div>
                         </div>
-                        <div class="window-title">terminal — curl</div>
+                        <div class="window-tabs">
+                            <button class="tab-btn active" onclick="switchHeroTab('http', this)">HTTP</button>
+                            <button class="tab-btn" onclick="switchHeroTab('curl', this)">cURL</button>
+                        </div>
                     </div>
-                    <div class="code-content">
+                    
+                    <div id="hero-code-http" class="code-content">
+                        <span class="token-cmd">GET</span> <span class="token-str">/api/standings</span> <span class="token-arg">HTTP/1.1</span><br>
+                        <span class="token-cmd">Host:</span> 127.0.0.1:8000<br>
+                        <span class="token-cmd">Authorization:</span> Bearer YOUR_TOKEN<br>
+                        <span class="token-cmd">Accept:</span> application/json
+                    </div>
+
+                    <div id="hero-code-curl" class="code-content" style="display: none;">
                         <span class="token-cmd">curl</span> -X GET \<br>
                         &nbsp;&nbsp;<span class="token-str">"http://127.0.0.1:8000/api/standings"</span> \<br>
                         &nbsp;&nbsp;-H <span class="token-arg">'Authorization: Bearer YOUR_TOKEN'</span>
@@ -105,7 +116,6 @@
             </div>
 
             <div class="features__grid">
-                <!-- Feature 1 -->
                 <div class="glass-card feature-item fade-in-up">
                     <div class="feature-icon-box">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -113,7 +123,6 @@
                     <h3 class="feature-title">Secured Authentication</h3>
                     <p class="feature-desc">Powered by Laravel Sanctum. Role-based access control for Operators and Admins using JWT Bearer Tokens.</p>
                 </div>
-                <!-- Feature 2 -->
                 <div class="glass-card feature-item fade-in-up" style="transition-delay: 0.1s;">
                     <div class="feature-icon-box">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6M6 20V10M18 20V4"></path></svg>
@@ -121,7 +130,6 @@
                     <h3 class="feature-title">Automated Standings</h3>
                     <p class="feature-desc">Points, Goal Difference (GD), and Rankings are calculated automatically whenever a match score is updated.</p>
                 </div>
-                <!-- Feature 3 -->
                 <div class="glass-card feature-item fade-in-up" style="transition-delay: 0.2s;">
                     <div class="feature-icon-box">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
@@ -132,11 +140,84 @@
             </div>
         </section>
 
+        <!-- NEW: INTEGRATION SECTION -->
+        <section class="section container" id="integration">
+            <div class="section-header-centered fade-in-up">
+                <h2 class="section-title">Connect in Minutes</h2>
+                <p class="section-subtitle">
+                    Copy and paste these snippets to start consuming the API immediately. We support all major platforms.
+                </p>
+            </div>
+
+            <div class="code-window-wrapper fade-in-up">
+                <div class="code-window">
+                    <div class="window-bar">
+                        <div class="window-controls">
+                            <div class="control mac-red"></div>
+                            <div class="control mac-yellow"></div>
+                            <div class="control mac-green"></div>
+                        </div>
+                        <div class="window-tabs">
+                            <button class="tab-btn active" onclick="switchIntegrationTab('js', this)">JavaScript (Fetch)</button>
+                            <button class="tab-btn" onclick="switchIntegrationTab('php', this)">PHP (Laravel/Guzzle)</button>
+                            <button class="tab-btn" onclick="switchIntegrationTab('py', this)">Python</button>
+                        </div>
+                    </div>
+                    
+                    <!-- JS Code -->
+                    <div id="code-js" class="code-content">
+                        <span class="token-keyword">const</span> <span class="token-func">fetchStandings</span> = <span class="token-keyword">async</span> () => {<br>
+                        &nbsp;&nbsp;<span class="token-keyword">try</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">const</span> res = <span class="token-keyword">await</span> <span class="token-func">fetch</span>(<span class="token-str">'http://127.0.0.1:8000/api/standings'</span>, {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-str">'Authorization'</span>: <span class="token-str">'Bearer YOUR_TOKEN'</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="token-str">'Accept'</span>: <span class="token-str">'application/json'</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-keyword">const</span> data = <span class="token-keyword">await</span> res.<span class="token-func">json</span>();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-func">console</span>.<span class="token-func">log</span>(data);<br>
+                        &nbsp;&nbsp;} <span class="token-keyword">catch</span> (err) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-func">console</span>.<span class="token-func">error</span>(err);<br>
+                        &nbsp;&nbsp;}<br>
+                        };
+                    </div>
+
+                    <!-- PHP Code -->
+                    <div id="code-php" class="code-content" style="display: none;">
+                        <span class="token-comment">// Using Guzzle HTTP Client</span><br>
+                        $client = <span class="token-keyword">new</span> \GuzzleHttp\Client();<br>
+                        $response = $client-><span class="token-func">request</span>(<span class="token-str">'GET'</span>, <span class="token-str">'http://127.0.0.1:8000/api/standings'</span>, [<br>
+                        &nbsp;&nbsp;<span class="token-str">'headers'</span> => [<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-str">'Authorization'</span> => <span class="token-str">'Bearer YOUR_TOKEN'</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="token-str">'Accept'</span> => <span class="token-str">'application/json'</span>,<br>
+                        &nbsp;&nbsp;],<br>
+                        ]);<br>
+                        <br>
+                        <span class="token-func">echo</span> $response-><span class="token-func">getBody</span>();
+                    </div>
+
+                    <!-- Python Code -->
+                    <div id="code-py" class="code-content" style="display: none;">
+                        <span class="token-keyword">import</span> requests<br><br>
+                        url = <span class="token-str">"http://127.0.0.1:8000/api/standings"</span><br>
+                        headers = {<br>
+                        &nbsp;&nbsp;<span class="token-str">"Authorization"</span>: <span class="token-str">"Bearer YOUR_TOKEN"</span>,<br>
+                        &nbsp;&nbsp;<span class="token-str">"Accept"</span>: <span class="token-str">"application/json"</span><br>
+                        }<br><br>
+                        response = requests.<span class="token-func">get</span>(url, headers=headers)<br>
+                        <span class="token-func">print</span>(response.<span class="token-func">json</span>())
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- DOCS SECTION -->
         <section class="section container" id="docs">
-            <div class="section-header">
+            <div class="section-header-centered">
                 <h2 class="section-title">API Reference</h2>
-                <p class="section-subtitle" style="text-align: left; margin-left: 0;">Interact directly with the endpoints below.</p>
+                <p class="section-subtitle">
+                    Interact directly with the endpoints below. Explore authentication, team management, and match scoring features in real-time.
+                </p>
             </div>
 
             <div class="playground-container fade-in-up">
@@ -156,13 +237,13 @@
             </div>
         </section>
 
-        <!-- CTA SECTION (Refined Description & Title) -->
+        <!-- CTA SECTION -->
         <section class="section container" style="padding-top: 2rem;">
             <div class="glass-card cta-card fade-in-up">
                 <div class="cta-content">
                     <h3 style="font-size: 2.25rem; font-weight: 700; margin-bottom: 1rem;">Start Building Your League Platform</h3>
                     <p style="color: var(--color-text-muted); margin-bottom: 2.5rem; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.8;">
-                        Don't reinvent the wheel. Our API provides a solid foundation for your football management system. With comprehensive documentation and clear examples, you'll be up and running in minutes, not days. Check out our integration guides for JavaScript (Fetch & Axios) to see how easy it is to connect.
+                        Don't reinvent the wheel. Our API provides a solid foundation for your football management system. With comprehensive documentation and clear examples, you'll be up and running in minutes, not days.
                     </p>
                     <a href="example" class="btn btn--primary btn--lg">
                         See Integration Examples
@@ -177,7 +258,10 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-inner">
-                <p>&copy; 2025 Football League API. All rights reserved.</p>
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                    <p>&copy; 2025 Football League API. All rights reserved.</p>
+                    <p style="font-size:0.75rem; color: #52525b;">Built with Laravel 11, Sanctum & MySQL.</p>
+                </div>
                 <div class="footer-links">
                     <a href="https://github.com/AllyncID/football-league-management-api" target="_blank" style="display: flex; align-items: center; gap: 6px;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-7.38-4.005-1.41-.09-.285-.585-1.185-1-1.425-.345-.195-.84-.675-.015-.69.78-.015 1.335.72 1.515 1.02 1.485 2.505 3.915 1.8 4.875 1.365.15-.96.525-1.605.945-1.98-2.655-.3-5.445-1.32-5.445-5.91 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.61-5.475 5.91.54.465 1.02 1.38 1.02 2.79 0 2.01-.015 3.63-.015 4.125 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>

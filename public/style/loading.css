@@ -1,61 +1,58 @@
+/* --- LOADING OVERLAY --- */
 #loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000; /* Deep Black */
-    z-index: 9999; /* Highest priority */
+    background-color: #050505; /* Deep Black background */
+    z-index: 9999; /* Pastikan di atas semua elemen */
     display: flex;
     justify-content: center;
     align-items: center;
     transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
 }
 
+/* Class untuk menyembunyikan overlay */
 #loading-overlay.hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
 }
 
-/* Spinner Animation */
-.spinner {
-    width: 40px;
-    height: 40px;
+/* --- RIPPLE SPINNER ANIMATION --- */
+.ripple-spinner {
+    display: inline-block;
     position: relative;
+    width: 80px; /* Sedikit diperbesar agar pas di tengah */
+    height: 80px;
 }
 
-.spinner div {
-    transform-origin: 20px 20px;
-    animation: spinner-anim 1.2s linear infinite;
-}
-
-.spinner div:after {
-    content: " ";
-    display: block;
+.ripple-spinner div {
     position: absolute;
-    top: 3px;
-    left: 18px;
-    width: 4px;
-    height: 10px;
-    border-radius: 20%;
-    background: #fff;
+    border: 3px solid #ffffff; /* Warna Putih Minimalis */
+    opacity: 1;
+    border-radius: 50%;
+    animation: ripple 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 
-.spinner div:nth-child(1) { transform: rotate(0deg); animation-delay: -1.1s; }
-.spinner div:nth-child(2) { transform: rotate(30deg); animation-delay: -1s; }
-.spinner div:nth-child(3) { transform: rotate(60deg); animation-delay: -0.9s; }
-.spinner div:nth-child(4) { transform: rotate(90deg); animation-delay: -0.8s; }
-.spinner div:nth-child(5) { transform: rotate(120deg); animation-delay: -0.7s; }
-.spinner div:nth-child(6) { transform: rotate(150deg); animation-delay: -0.6s; }
-.spinner div:nth-child(7) { transform: rotate(180deg); animation-delay: -0.5s; }
-.spinner div:nth-child(8) { transform: rotate(210deg); animation-delay: -0.4s; }
-.spinner div:nth-child(9) { transform: rotate(240deg); animation-delay: -0.3s; }
-.spinner div:nth-child(10) { transform: rotate(270deg); animation-delay: -0.2s; }
-.spinner div:nth-child(11) { transform: rotate(300deg); animation-delay: -0.1s; }
-.spinner div:nth-child(12) { transform: rotate(330deg); animation-delay: 0s; }
+.ripple-spinner div:nth-child(2) {
+    animation-delay: -0.5s;
+}
 
-@keyframes spinner-anim {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
+@keyframes ripple {
+    0% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: 0px;
+        left: 0px;
+        width: 72px;
+        height: 72px;
+        opacity: 0;
+    }
 }
