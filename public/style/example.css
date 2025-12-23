@@ -85,21 +85,68 @@ body {
 .table-responsive {
     overflow-x: auto;
     margin: 0 -1rem; padding: 0 1rem; /* Full width scroll on mobile */
-    min-height: 300px;
+    min-height: 200px; /* Adjusted height */
 }
 .data-table {
-    width: 100%; border-collapse: collapse; font-size: 0.9rem; white-space: nowrap;
+    width: 100%; border-collapse: separate; /* Changed for animation spacing */
+    border-spacing: 0; /* Reset spacing */
+    font-size: 0.9rem; white-space: nowrap;
 }
 .data-table th {
     text-align: left; padding: 0.8rem; color: var(--color-text-muted);
     font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
     border-bottom: 1px solid var(--color-border);
 }
+
+/* ANIMASI BARIS (Smooth Sorting) */
+.data-table tbody tr {
+    transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1), background-color 0.3s;
+    position: relative; 
+    z-index: 1;
+}
+
 .data-table td {
     padding: 1rem 0.8rem; border-bottom: 1px solid rgba(255, 255, 255, 0.03);
     color: var(--color-text); vertical-align: middle;
+    background-color: transparent; /* Ensure row color shows through */
 }
 .data-table tr:hover { background: rgba(255, 255, 255, 0.02); }
+
+/* LIVE MATCH HIGHLIGHTS */
+/* Tim sedang main (Base) */
+.live-row {
+    background: rgba(59, 130, 246, 0.08) !important; /* Blue tint */
+    position: relative;
+}
+.live-row td:first-child {
+    box-shadow: inset 3px 0 0 var(--color-accent); /* Left border indicator */
+}
+
+/* Tim sedang menang */
+.live-row-winning {
+    background: rgba(16, 185, 129, 0.08) !important; /* Green tint */
+}
+.live-row-winning td:first-child {
+    box-shadow: inset 3px 0 0 var(--color-success);
+}
+.live-row-winning td { color: #d1fae5; } /* Text slightly brighter */
+
+/* Tim sedang kalah */
+.live-row-losing {
+    background: rgba(239, 68, 68, 0.08) !important; /* Red tint */
+}
+.live-row-losing td:first-child {
+    box-shadow: inset 3px 0 0 var(--color-danger);
+}
+
+/* Flash Effect saat Gol */
+@keyframes flash-goal {
+    0% { background-color: rgba(255, 255, 255, 0.2); }
+    100% { background-color: transparent; }
+}
+.flash-update {
+    animation: flash-goal 0.8s ease-out;
+}
 
 /* Table Content */
 .rank-cell { font-weight: 700; color: var(--color-text-muted); width: 40px; text-align: center; }
